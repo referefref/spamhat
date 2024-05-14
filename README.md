@@ -1,3 +1,19 @@
+# SpamHAT
+SpamHAT is a Simple Open Relay Simulator for Spam Capture and Analysis written in Perl, and designed to be run on Debian with MySQL as a logging backend. The project was created by the UNAM (National Autonomous University of Mexico) chapter of the Honeynet Project in 2015 and contains a number of modules for handling different aspects of email payloads such as attachments, binaries, domains, IP addresses, subjects and URLs allowing it to respond differently to content within the email such as downloading URL payloads within the email, checking the email subject from a blocklist of patterns, generic regex parsing (emails, domains, IP addresses etc), hashing binary payloads, and storing attachments.
+
+## Installation
+```
+git clone https://github.com/referefref/spamhat.git
+docker compose up -d
+```
+
+## Examples
+![image](https://github.com/referefref/spamhat/assets/56499429/52a5854c-d7fb-4362-9c50-258be9561990)
+![image](https://github.com/referefref/spamhat/assets/56499429/7332e72f-cd1a-454d-98f8-0f93aca641ad)
+
+
+## Original Notes
+
 Spam Honeypot Tool
 ==================
 
