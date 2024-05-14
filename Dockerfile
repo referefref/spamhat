@@ -8,7 +8,7 @@ RUN apt-get update && \
 
 WORKDIR /root
 
-RUN git clone https://github.com/miguelraulb/spamhat.git
+RUN git clone https://github.com/referefref/spamhat.git
 WORKDIR /root/spamhat
 
 RUN carton install --deployment
@@ -16,6 +16,6 @@ RUN carton install --deployment
 RUN service mysql start && \
     /usr/bin/mysql -e "CREATE DATABASE spamhat;" && \
     /usr/bin/mysql -e "CREATE USER spamhat@localhost IDENTIFIED BY 'spamhat';" && \
-    /usr/bin/mysql -e "GRANT ALL PRIVILEGES ON spamhat.* TO spamhat@localhost;"
+    /usr/bin/mysql -e "GRANT ALL PRIVILEGES ON spamhat.* TO spamhat@localhost;" && \
 
 EXPOSE 25/tcp
