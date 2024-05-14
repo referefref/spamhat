@@ -1,3 +1,5 @@
+## Manual installation is not recommended, if required follow the steps in the Dockerfile
+
 Linux Debian Installation
 =========================
 
