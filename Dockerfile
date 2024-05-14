@@ -11,11 +11,17 @@ WORKDIR /root
 RUN git clone https://github.com/referefref/spamhat.git
 WORKDIR /root/spamhat
 
-RUN carton install --deployment
+RUN carton install && carton install --deployment
 
+# Ensure the script has execute permissions
+RUN chmod +x /root/spamhat/runpot.sh
+
+# Start MySQL service, create database and user
 RUN service mysql start && \
     /usr/bin/mysql -e "CREATE DATABASE spamhat;" && \
-    /usr/bin/mysql -e "CREATE USER spamhat@localhost IDENTIFIED BY 'spamhat';" && \
-    /usr/bin/mysql -e "GRANT ALL PRIVILEGES ON spamhat.* TO spamhat@localhost;" && \
+    /usr/bin/mysql -e "CREATE USER spamhat@localhost IDENTIFIED BY 'password';" && \
+    /usr/bin/mysql -e "GRANT ALL PRIVILEGES ON spamhat.* TO spamhat@localhost;"
 
-EXPOSE 25/tcp
+ENTRYPOINT ["/root/spamhat/runpot.sh"]
+
+EXPOSE 2525/tcp
