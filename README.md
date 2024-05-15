@@ -5,7 +5,7 @@ The project has been modernised with carton, MariaDB and docker for simple deplo
 
 ## Installation
 ```
-wget https://raw.githubusercontent.com/referefref/spamhat/master/docker-compose.yaml
+wget https://raw.githubusercontent.com/referefref/spamhat-ng/master/docker-compose.yaml
 docker compose up -d
 ```
 ## Note
