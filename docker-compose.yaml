@@ -1,0 +1,46 @@
+services:
+  spamhat:
+    build: .
+    image: referefrefref/spamhat:latest
+    depends_on:
+      - mariadb
+    networks:
+      - spamhat_network
+    ports:
+      - "2525:2525"
+    environment:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_USER: spamhat
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: spamhat
+    volumes:
+      - ./output:/root/spamhat/output
+      - ./spam:/root/spamhat/spam
+      - ./logs:/root/spamhat/log
+    entrypoint: ["/root/spamhat/init-and-run.sh"]
+
+  mariadb:
+    image: mariadb:latest
+    networks:
+      - spamhat_network
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: spamhat
+      MYSQL_USER: spamhat
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  spamhat_network:
+    driver: bridge
+
+volumes:
+  mariadb_data:
