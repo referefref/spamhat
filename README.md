@@ -3,7 +3,7 @@ SpamHAT is a Simple Open Relay Simulator for Spam Capture and Analysis written i
 
 ## Installation
 ```
-git clone https://github.com/referefref/spamhat.git
+wget https://raw.githubusercontent.com/referefref/spamhat/master/docker-compose.yaml
 docker compose up -d
 ```
 
