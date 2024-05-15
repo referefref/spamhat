@@ -4,7 +4,7 @@ LABEL maintainer="@referefref"
 
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
-    apt-get install -y git gcc build-essential perl wget mariadb-server carton
+    apt-get install -y git gcc build-essential perl wget carton mariadb-client
 
 WORKDIR /root
 
@@ -13,15 +13,10 @@ WORKDIR /root/spamhat
 
 RUN carton install && carton install --deployment
 
-# Ensure the script has execute permissions
+# Ensure the scripts have execute permissions
 RUN chmod +x /root/spamhat/runpot.sh
+RUN chmod +x /root/spamhat/init-and-run.sh
 
-# Start MySQL service, create database and user
-RUN service mysql start && \
-    /usr/bin/mysql -e "CREATE DATABASE spamhat;" && \
-    /usr/bin/mysql -e "CREATE USER spamhat@localhost IDENTIFIED BY 'password';" && \
-    /usr/bin/mysql -e "GRANT ALL PRIVILEGES ON spamhat.* TO spamhat@localhost;"
-
-ENTRYPOINT ["/root/spamhat/runpot.sh"]
+ENTRYPOINT ["/root/spamhat/init-and-run.sh"]
 
 EXPOSE 2525/tcp
